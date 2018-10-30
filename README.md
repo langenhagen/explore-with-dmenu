@@ -12,6 +12,7 @@ The project is structured as follows:
 └── README.md                   You are here now.
 ```
 
+
 ## Installation
 You can run the script `explore-with-dmenu.sh` directly on your console.
 I recommend assigning a global keyboard shortcut (see below).
@@ -94,7 +95,7 @@ choices.
 - `'..'` denotes the upper level directory. This makes `explore-with-dmenu.sh` enter the parent
   directory.
 
-The following entries contain relative paths that will be prepended with the `selected_path`, i.e.
+The 3 last entries in contain relative paths that will be prepended with the `selected_path`, i.e.
 `${selected_path}/path/to/some/often/used/folder` `${selected_path}/path/to/some/often/used/file`
 and all the immediate subdirectories and files of `selected_path`.
 
@@ -142,10 +143,12 @@ See LICENSE file.
 ## TODO
 
 - open the standard Terminal (regardless of OS if possible) instead of `Konsole`
+- make custom `.edmrc` passable as an option to the main program
 - print "usage" string, when `-h`, `--help` or wrong parameters are handed in
-- gittify
+- upload to github
 - make a nice gif animation and add it to the readme or so for github.
 - add dmenu customizations to the sample .edmrc
 - make it work with absolute paths in the array `choices`
 - make it work with URLs in the array `choices`. `xdg-open` can handle URLs
 - maybe rename `explore-with-dmenu.sh` to `suckless-explore.sh`
+- add a section to Further Reading: provide links to dmenu and the explores it mentions

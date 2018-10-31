@@ -36,7 +36,7 @@ source "${HOME}/.edmrc" 2>/dev/null
 
 while : ; do
 
-    dmenu_result="$(printf '%s\n' "${choices[@]}" | dmenu -i -l 100)"  # -i: ignore case
+    dmenu_result="$(printf '%s\n' "${choices[@]}" | dmenu -i -p "${selected_path}" -l 100)"  # -i: ignore case
     if [ $? != 0 ] ; then
         exit 1
     fi

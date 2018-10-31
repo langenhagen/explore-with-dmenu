@@ -58,7 +58,7 @@ and a key combination.
 
 ## Customizing
 
-You may customize your `explore-with-dmenu.sh` by adding a `.edmrc` file to your $HOME directory.
+You may customize `explore-with-dmenu.sh` by adding a `.edmrc` file to your `${HOME}` directory.
 `explore-with-dmenu.sh` sources this file at startup and interpretes its contents as bash.
 
 There are 4 variables that `explore-with-dmenu.sh` takes into account:
@@ -86,14 +86,14 @@ choices=(
     )
 ```
 
-The first 3 denoted choices are special entries you may or may not add to your initial list of
-choices.
-- `'<open terminal here>'` adds an item that, when selected, will open the  Terminal at the
-  directory given by `selected_path`. This is a special string.
-- `'.'` reflects the current path, which is initially `selected_path`. selecting this makes
-  `explore-with-dmenu.sh` open the `selected_path` with a default application.
-- `'..'` denotes the upper level directory. This makes `explore-with-dmenu.sh` enter the parent
-  directory.
+The first 3 denoted items are special entries you may or may not add to your initial list of
+choices:
+- `'<open terminal here>'` adds an item that, when selected, will open a Terminal at the
+  path given by `selected_path`. `'<open terminal here>'` is a special string.
+- `'.'` reflects the current path, which is initially `selected_path`. Selecting this item makes
+  `explore-with-dmenu.sh` open the `selected_path` with a default application, e.g. Finder.
+- `'..'` denotes the upper level directory. This makes, on selection, `explore-with-dmenu.sh`
+  enter the parent directory.
 
 The 3 last entries in contain relative paths that will be prepended with the `selected_path`, i.e.
 `${selected_path}/path/to/some/often/used/folder` `${selected_path}/path/to/some/often/used/file`
@@ -105,7 +105,7 @@ choices=(
     '<open terminal here>'
     '.'
     '..'
-    "$(ls ${selected_path})"
+    "$(ls -t ${selected_path})"
     )
 ```
 
@@ -115,8 +115,9 @@ On Linux, it defaults to `'xdg-open'`. On Mac, it defaults to `'open'`.
 
 
 `open_terminal_command` stores the command that shall be used to open a folder when
-`<open terminal here>` is selected. This defaults to `'konsole --workdir'` which should break on
-most systems by default, so change it to your needs. Making robust default in the TODOs.
+`<open terminal here>` is selected. This defaults to `open -a Terminal` on Mac OS and defaults to
+`'konsole --workdir'` on Linux. The latter would break on most systems by default, so change it to
+your needs.
 
 
 ## Contributing
@@ -129,9 +130,15 @@ Happy coding!
 See LICENSE file.
 
 
+## Related Software
+
+Given that `dmenu` is such a great tool, the idea of writing an explorer with `dmenu` is not new.
+please have a look into the following link for other browsers and other tools written with `dmenu`:
+https://tools.suckless.org/dmenu/scripts/
+
+
 ## Known Issues
 
-- At the moment, .edmrc is supported but not documented.
 - The program `xdg-open` that comes with Ubuntu 18.04 is a prerequisite,
   if not configured otherwise via .edmrc. That may not work with some OSes out of the box
   No checks happen however. On Mac, use `open` instead of `xdg-open`.
@@ -142,13 +149,11 @@ See LICENSE file.
 
 ## TODO
 
-- open the standard Terminal (regardless of OS if possible) instead of `Konsole`
-- make custom `.edmrc` passable as an option to the main program
-- print "usage" string, when `-h`, `--help` or wrong parameters are handed in
 - upload to github
 - make a nice gif animation and add it to the readme or so for github.
-- add dmenu customizations to the sample .edmrc
 - make it work with absolute paths in the array `choices`
-- make it work with URLs in the array `choices`. `xdg-open` can handle URLs
+- make it work with Web URLs in the array `choices`. At least, `xdg-open` can handle URLs
+- make the script take a custom rc-file as a command line option
+- print "usage" string, when `-h`, `--help` or wrong parameters are handed in
+- make `dmenu` customizable via `.edmrc`
 - maybe rename `explore-with-dmenu.sh` to `suckless-explore.sh`
-- add a section to Further Reading: provide links to dmenu and the explores it mentions

@@ -2,12 +2,12 @@
 
 # Calls dmenu on the given array of choices.
 # If the selected choice is a folder, recursively open dmenu with the folder's contents as choices.
-# If the selection is not a folder, attempt to open it with xdg-open.
-# It can also open the terminal program `konsole` at the given path.
-# Can handle symlinks.
+# If the selection is not a folder, or the same folder, denoted as '.', attempt to open it with
+# xdg-open or a comparable tool.
+# It can also open a terminal program at the given path.
 #
 # author: andreasl
-# version: 18-10-30
+# version: 18-10-31
 
 
 function define_standard_settings {
@@ -18,15 +18,17 @@ function define_standard_settings {
         '<open terminal here>'
         '.'
         '..'
-        "$(ls -t "${selected_path}")")
+        "$(ls -t "${selected_path}")"
+        )
 
     if [ "$(uname)" == "Darwin" ] ; then
         open_command='open'
+        open_terminal_command='open -a Terminal'
     else
         open_command='xdg-open'
+        open_terminal_command='konsole --workdir'
     fi
 
-    open_terminal_command='konsole --workdir'
 }
 
 define_standard_settings

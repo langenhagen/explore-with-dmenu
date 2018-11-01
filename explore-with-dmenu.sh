@@ -18,7 +18,7 @@ function define_standard_settings {
         '<open terminal here>'
         '.'
         '..'
-        "$(ls -t "${selected_path}")"
+        "$(ls "${selected_path}")"
         )
 
     if [ "$(uname)" == "Darwin" ] ; then

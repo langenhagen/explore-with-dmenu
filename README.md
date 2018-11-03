@@ -105,7 +105,7 @@ choices=(
     '<open terminal here>'
     '.'
     '..'
-    "$(ls -t ${selected_path})"
+    "$(ls ${selected_path})"
     )
 ```
 

@@ -38,7 +38,7 @@ Invoke the script to start dmenu:
 ```
 
 A `dmenu` window will be drawn depicting some initial items. You can use the arrow keys to navigate
-through the list of shown items. Typing on keyboard filters entries that do not kontain the entered
+through the list of shown items. Typing on keyboard filters entries that do not contain the entered
 substring. Press `<Enter>` for a selection. If a folder has been selected, `explore-with-dmenu.sh`
 will open a new `dmenu` containing of the contents of the folder, including an option to open a
 Terminal in that given directory, as well as options to open the current folder with a standard

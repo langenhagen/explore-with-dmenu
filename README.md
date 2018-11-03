@@ -139,18 +139,17 @@ https://tools.suckless.org/dmenu/scripts/
 
 ## Known Issues
 
-- The program `xdg-open` that comes with Ubuntu 18.04 is a prerequisite,
-  if not configured otherwise via .edmrc. That may not work with some OSes out of the box
-  No checks happen however. On Mac, use `open` instead of `xdg-open`.
+- On Linux, the default programs `xdg-open` and `gnome-terminal` that come e.g. with Ubuntu 18.04
+  are a default prerequisite. That may not work with some OSes out of the box, but you can configure
+  it via your .edmrc. No checks happen however.
 
 
 ## TODO
 
 - upload to github
-- make a nice gif animation and add it to the readme or so for github.
+- make a nice gif animation and add it to the Readme or so for github.
 - make it work with absolute paths in the array `choices`
 - make it work with Web URLs in the array `choices`. At least, `xdg-open` can handle URLs
 - make the script take a custom rc-file as a command line option
 - print "usage" string, when `-h`, `--help` or wrong parameters are handed in
-- make `dmenu` customizable via `.edmrc`
 - maybe rename `explore-with-dmenu.sh` to `suckless-explore.sh`

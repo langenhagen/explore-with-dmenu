@@ -37,5 +37,5 @@ choices=(
 open_command='xdg-open'
 
 # stores a command that spawns a shell at the current directory;
-# if not specified, defaults to `konsole --workdir`
+# if not specified, defaults to `gnome-terminal --working-directory`
 open_terminal_command='konsole --workdir'

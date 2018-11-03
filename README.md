@@ -116,8 +116,8 @@ On Linux, it defaults to `'xdg-open'`. On Mac, it defaults to `'open'`.
 
 `open_terminal_command` stores the command that shall be used to open a folder when
 `<open terminal here>` is selected. This defaults to `open -a Terminal` on Mac OS and defaults to
-`'konsole --workdir'` on Linux. The latter would break on most systems by default, so change it to
-your needs.
+`'gnome-terminal --working-directory='` on Linux. The latter would work on most Ubuntu systems but
+break on most other systems by default, so change it to your needs.
 
 
 ## Contributing
@@ -142,9 +142,6 @@ https://tools.suckless.org/dmenu/scripts/
 - The program `xdg-open` that comes with Ubuntu 18.04 is a prerequisite,
   if not configured otherwise via .edmrc. That may not work with some OSes out of the box
   No checks happen however. On Mac, use `open` instead of `xdg-open`.
-- The program `Konsole` that comes with Ubuntu 18.04 is a prerequisite,
-  if not configured otherwise via .edmrc.
-  No checks happen however.
 
 
 ## TODO

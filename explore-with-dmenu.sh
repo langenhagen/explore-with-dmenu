@@ -26,7 +26,7 @@ function define_standard_settings {
         open_terminal_command='open -a Terminal'
     else
         open_command='xdg-open'
-        open_terminal_command='konsole --workdir'
+        open_terminal_command='gnome-terminal --working-directory'
     fi
 
 }
@@ -49,7 +49,7 @@ while : ; do
     selected_path="$(realpath "${selected_path}/${dmenu_result}")"
 
     if [ -f "${selected_path}" -o "${dmenu_result}" = "." ]; then
-        eval "${open_command}" "\"${selected_path}\""
+        eval "${open_command} \"${selected_path}\""
         exit 0
     elif [ -d "${selected_path}" ]; then
         choices=( '<open terminal here>' '.' '..' "$(ls "${selected_path}")")

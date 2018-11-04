@@ -4,12 +4,16 @@ A fast and simple file explorer using `dmenu` (https://tools.suckless.org/dmenu/
 Use the arrow-keys and type on the keyboard to find items and press <Enter> to navigate into folders
 or to open files with their default applications. Press <ESC> to exit anytime without effect.
 
+![](res/screen-example.gif)
+
+
 The project is structured as follows:
 ```
 .
 ├── explore-with-dmenu.sh       Main program.
 ├── LICENSE                     License definition.
-└── README.md                   You are here now.
+├── README.md                   You are here now.
+└── res                         Additional resources.
 ```
 
 
@@ -146,8 +150,6 @@ https://tools.suckless.org/dmenu/scripts/
 
 ## TODO
 
-- upload to github
-- make a nice gif animation and add it to the Readme or so for github.
 - make it work with absolute paths in the array `choices`
 - make it work with Web URLs in the array `choices`. At least, `xdg-open` can handle URLs
 - make the script take a custom rc-file as a command line option

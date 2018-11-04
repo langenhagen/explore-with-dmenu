@@ -53,6 +53,8 @@ while : ; do
         exit 0
     elif [ -d "${selected_path}" ]; then
         choices=( '<open terminal here>' '.' '..' "$(ls "${selected_path}")")
+    else
+        selected_path="$(dirname "${selected_path}")"
     fi
 
 done

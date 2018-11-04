@@ -10,6 +10,7 @@ folders or to open files with their default applications. Press `<ESC>` to exit 
 The project is structured as follows:
 ```
 .
+├── .edmrc-sample               Example rc file.
 ├── explore-with-dmenu.sh       Main program.
 ├── LICENSE                     License definition.
 ├── README.md                   You are here now.

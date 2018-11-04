@@ -1,8 +1,8 @@
 # explore-with-dmenu
 A fast and simple file explorer using `dmenu` (https://tools.suckless.org/dmenu/) written in bash.
 
-Use the arrow-keys and type on the keyboard to find items and press <Enter> to navigate into folders
-or to open files with their default applications. Press <ESC> to exit anytime without effect.
+Use the arrow-keys and type on the keyboard to find items and press `<Enter>` to navigate into
+folders or to open files with their default applications. Press `<ESC>` to exit at anytime.
 
 ![](res/screen-example.gif)
 

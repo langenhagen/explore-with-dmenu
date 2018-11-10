@@ -36,7 +36,7 @@ source "${HOME}/.edmrc" 2>/dev/null
 
 while : ; do
 
-    dmenu_result="$(printf '%s\n' "${choices[@]}" | dmenu -i -p "${selected_path}" -l 100)"
+    dmenu_result="$(printf '%s\n' "${choices[@]}" | dmenu -i -p "${selected_path}" -l 50)"
     if [ $? != 0 ] ; then
         exit 1
     fi

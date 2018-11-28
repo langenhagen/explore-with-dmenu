@@ -30,7 +30,7 @@ On Ubuntu, you can install it via:
 apt install dmenu
 ```
 
-On Mac OS, install `dmenu` preferrably with Homebrew:
+On Mac OS, install `dmenu` preferably with Homebrew:
 ```bash
 brew install dmenu
 ```
@@ -51,7 +51,6 @@ file browser (`'.'`) or to step one folder-level up (`'..'`). Press `<ESC>` at a
 
 
 ## Using a Global Keyboard Shortcut
-
 `explore-with-dmenu.sh` becomes handy when you assign it to a global keyboard shortcut
 that you can trigger from anywhere in your graphical user interface.
 
@@ -62,7 +61,6 @@ and a key combination.
 
 
 ## Customizing
-
 You may customize `explore-with-dmenu.sh` by adding a `.edmrc` file to your `${HOME}` directory.
 `explore-with-dmenu.sh` sources this file at startup and interpretes its contents as bash.
 
@@ -136,21 +134,18 @@ See LICENSE file.
 
 
 ## Related Software
-
 Given that `dmenu` is such a great tool, the idea of writing an explorer with `dmenu` is not new.
 please have a look into the following link for other browsers and other tools written with `dmenu`:
 https://tools.suckless.org/dmenu/scripts/
 
 
 ## Known Issues
-
 - On Linux, the default programs `xdg-open` and `gnome-terminal` that come e.g. with Ubuntu 18.04
   are a default prerequisite. That may not work with some OSes out of the box, but you can configure
   it via your .edmrc. No checks happen however.
 
 
 ## TODO
-
 - make it work with absolute paths in the array `choices`
 - make it work with Web URLs in the array `choices`. At least, `xdg-open` can handle URLs
 - make the script take a custom rc-file as a command line option

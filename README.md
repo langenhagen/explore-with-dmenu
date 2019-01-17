@@ -125,7 +125,6 @@ break on most other systems by default, so change it to your needs.
 
 ## Contributing
 Work on your stuff locally, branch, commit and modify to your heart's content.
-At the moment, there is no origin for this git repository!
 Happy coding!
 
 

@@ -125,6 +125,7 @@ break on most other systems by default, so change it to your needs.
 
 ## Contributing
 Work on your stuff locally, branch, commit and modify to your heart's content.
+If there is anything you can extend, fix or improve, please do so!
 Happy coding!
 
 

@@ -12,13 +12,13 @@
 
 function define_standard_settings {
 
-    selected_path="${HOME}"
+    selected_path="$HOME"
 
     choices=(
         '<open terminal here>'
         '.'
         '..'
-        "$(ls "${selected_path}")"
+        "$(ls "$selected_path")"
         )
 
     if [ "$(uname)" == "Darwin" ] ; then
@@ -36,25 +36,25 @@ source "${HOME}/.edmrc" 2>/dev/null
 
 while : ; do
 
-    dmenu_result="$(printf '%s\n' "${choices[@]}" | dmenu -i -p "${selected_path}" -l 50)"
+    dmenu_result="$(printf '%s\n' "${choices[@]}" | dmenu -i -p "$selected_path" -l 50)"
     if [ $? != 0 ] ; then
         exit 1
     fi
 
-    if [ "${dmenu_result}" = '<open terminal here>' ]; then
-        eval "${open_terminal_command}" "\"${selected_path}\""
+    if [ "$dmenu_result" = '<open terminal here>' ]; then
+        eval "$open_terminal_command" "\"${selected_path}\""
         exit 0
     fi
 
     selected_path="$(realpath "${selected_path}/${dmenu_result}")"
 
-    if [ -f "${selected_path}" -o "${dmenu_result}" = "." ]; then
+    if [ -f "$selected_path" -o "$dmenu_result" = "." ]; then
         eval "${open_command} \"${selected_path}\""
         exit 0
-    elif [ -d "${selected_path}" ]; then
-        choices=( '<open terminal here>' '.' '..' "$(ls "${selected_path}")")
+    elif [ -d "$selected_path" ]; then
+        choices=( '<open terminal here>' '.' '..' "$(ls "$selected_path")")
     else
-        selected_path="$(dirname "${selected_path}")"
+        selected_path="$(dirname "$selected_path")"
     fi
 
 done

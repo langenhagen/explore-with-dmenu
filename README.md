@@ -6,7 +6,6 @@ folders or to open files with their default applications. Press `<ESC>` to exit 
 
 ![](res/screen-example.gif)
 
-
 The project is structured as follows:
 ```
 .

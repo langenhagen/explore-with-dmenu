@@ -1,41 +1,42 @@
+#!/bin/bash
 # rc file for explore-with-dmenu.sh
-
+#
 # This file is plain bash. It be sourced by explore-with-dmenu.sh after loading the defaults.
 # This makes it possible to overwrite some or all of settings
-
+#
 # There are 4 configurable variables that `explore-with-dmenu.sh` takes into account,
-# but changing only 2 of them, the array ${choices} and the string ${open_terminal_command}
-# is sufficient in most cases
+# but changing only 2 of them, the array $choices and the string $open_terminal_command is
+# sufficient in most cases
 
-# the initial path explore-with-dmenu.sh uses
-# if not specified, defaults to ${HOME}
-selected_path="${HOME}"
+# the initial path explore-with-dmenu.sh uses, if not specified, defaults to $HOME
+selected_path="$HOME"
 
 # initial set of items shown at first
 choices=(
-    '<open terminal here>'              # add this special item to open a Shell at ${selected_path}
-    '.'                                 # add this special item to open ${selected_path} in a Finder
+    '<open terminal here>'              # add this special item to open a Shell at $selected_path
+    '.'                                 # add this special item to open $selected_path in a Finder
     '..'                                # add this special item to traverse to the parent folder
     'path/to/some/often/used/folder'    # add subdolders of $selected_path like this
     'path/to/some/often/used/file.txt'  # add files in folders under $selected_path like this
     'my/music/library/'
     'my/music/library/my favorite song.mp3'
-    "$(ls -t ${selected_path})"         # Output of `ls -t` on the $selected_path
+    "$(ls -t "$selected_path")"         # output of `ls -t` on the $selected_path
     )
 
-# if the array ${choices} is not specified, it defaults to:
+# if the array $choices is not specified, it defaults to:
 # choices=(
 #     '<open terminal here>'
 #     '.'
 #     '..'
-#     "$(ls "${selected_path}")"
+#     "$(ls "$selected_path")"
 #     )
 
-
-# stores a command that can open files and folders;
-# if not specified, defaults to `xdg-open` on Linux and `open` on Mac
+# the variable $open_command must store a command that will be executed with the chosen item is a
+# file or the string '.';
+# the command must handle can open files and folders and directory paths as arguments
 open_command='xdg-open'
 
-# stores a command that spawns a shell at the current directory;
-# if not specified, defaults to `gnome-terminal --working-directory`
+# the variable $open_terminal_command must store a command that will be executed with the chosen
+# item is the string '<open terminal here>';
+# the command must handle can open files and folders and directory paths as arguments
 open_terminal_command='konsole --workdir'

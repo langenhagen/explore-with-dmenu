@@ -1,5 +1,5 @@
 # explore-with-dmenu
-A fast and simple file explorer using `dmenu` (https://tools.suckless.org/dmenu/) written in bash.
+A handy and simple file explorer using `dmenu` (https://tools.suckless.org/dmenu) written in bash.
 
 Use the arrow-keys and type on the keyboard to find items and press `<Enter>` to navigate into
 folders or to open files with their default applications. Press `<ESC>` to exit at anytime.
@@ -60,7 +60,7 @@ and a key combination.
 
 
 ## Customizing
-You may customize `explore-with-dmenu.sh` by adding a `.edmrc` file to your `${HOME}` directory.
+You may customize `explore-with-dmenu.sh` by adding a file `.edmrc` to your `$HOME` directory.
 `explore-with-dmenu.sh` sources this file at startup and interpretes its contents as bash.
 
 There are 4 variables that `explore-with-dmenu.sh` takes into account:
@@ -71,9 +71,8 @@ There are 4 variables that `explore-with-dmenu.sh` takes into account:
 
 
 `selected_path` represents the initial path `explore-with-dmenu.sh` is working on.
-This path will be prepended to all paths denoted in the `choices` array. `selected_path` defaults
-to `${HOME}`.
-
+This path will be prepended to all paths denoted in the `choices` array.
+`selected_path` defaults to `$HOME`.
 
 `choices` represents an array of initial items the user is represented by dmenu.
 For instance:
@@ -84,7 +83,7 @@ choices=(
     '..'                                # add this special item for traverse to the parent folder
     'path/to/some/often/used/folder'    # add subdolders of $selected_path like this
     'path/to/some/often/used/file.txt'  # add files in folders under $selected_path like this
-    "$(ls ${selected_path})"            # Output of `ls` on the $selected_path
+    "$(ls "$selected_path")"            # Output of `ls` on the $selected_path
     )
 ```
 

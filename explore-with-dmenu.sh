@@ -28,16 +28,22 @@ function define_standard_settings {
 }
 
 define_standard_settings
-source "${HOME}/.edmrc" 2>/dev/null
+source "${XDG_CONFIG_PATH}/.edmrc" 2>/dev/null
 
 while : ; do
-    dmenu_result="$(printf '%s\n' "${choices[@]}" | dmenu -i -p "$selected_path" -l 50)" || exit 1
+    dmenu_result="$(printf '%s\n' "${choices[@]}" | dmenu -i -p "${selected_path}" -l 50 ${@})" || exit 1
     if [ "$dmenu_result" = '<open terminal here>' ]; then
         eval "$open_terminal_command" "\"${selected_path}\""
         exit 0
     fi
-
-    selected_path="$(realpath "${selected_path}/${dmenu_result}")"
+    if [[ $dmenu_result =~ ^/.* ]]; then
+        selected_path="$dmenu_result"
+    elif [[ $dmenu_result =~ ^h?[ft]?tps?: ]]; then
+        eval "${open_command} \"${dmenu_result}\""
+        exit 0
+    else
+        selected_path="$(realpath "${selected_path}/${dmenu_result}")"
+    fi
     if [ -f "$selected_path" ] || [ "$dmenu_result" = '.' ]; then
         eval "${open_command} \"${selected_path}\""
         exit 0

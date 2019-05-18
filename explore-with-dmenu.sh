@@ -28,7 +28,7 @@ function define_standard_settings {
 }
 
 define_standard_settings
-source "${XDG_CONFIG_PATH}/.edmrc" 2>/dev/null
+source "${XDG_CONFIG_HOME:-$HOME}/.edmrc" 2>/dev/null
 
 while : ; do
     dmenu_result="$(printf '%s\n' "${choices[@]}" | dmenu -i -p "${selected_path}" -l 50 ${@})" || exit 1

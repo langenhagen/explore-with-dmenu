@@ -18,7 +18,7 @@ function define_standard_settings {
         "$(ls "$selected_path")"
         )
 
-    if [ "$(uname)" == "Darwin" ] ; then
+    if [ "$(uname)" == "Darwin" ]; then
         open_command='open'
         open_terminal_command='open -a Terminal'
     else

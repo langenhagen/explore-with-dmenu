@@ -8,7 +8,7 @@
 #
 # author: andreasl
 
-function define_standard_settings {
+define_standard_settings() {
     selected_path="$HOME"
 
     choices=(

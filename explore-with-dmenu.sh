@@ -28,7 +28,7 @@ define_standard_settings() {
 }
 
 define_standard_settings
-source "${HOME}/.edmrc" 2>/dev/null
+source "${HOME}/.config/.edmrc" 2>/dev/null
 
 while : ; do
     dmenu_result="$(printf '%s\n' "${choices[@]}" | dmenu -i -p "$selected_path" -l 50)" || exit 1

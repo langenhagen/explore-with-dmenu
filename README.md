@@ -63,7 +63,8 @@ combination.
 
 
 ## Customizing
-You may customize `explore-with-dmenu.sh` by adding a file `.edmrc` to your `$HOME` directory.
+You can customize `explore-with-dmenu.sh` by adding a file `.edmrc` to the directory
+`$HOME/.config`.
 `explore-with-dmenu.sh` sources this file at startup and interpretes its contents as bash.
 
 There are 4 variables that `explore-with-dmenu.sh` takes into account:

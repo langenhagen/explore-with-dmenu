@@ -1,7 +1,7 @@
 #!/bin/bash
-# Calls dmenu on the given array of choices, effectively acting as a simple file explorer.
+# Call dmenu on the given array of choices, effectively acting as a simple file explorer.
 # If the selected choice is a folder, recursively open dmenu with the folder's contents as choices.
-# If the selection is not a folder, or the current folder, denoted as '.', attempt to open it with
+# If the selection is not a folder - or the current folder, denoted as '.' - attempt to open it with
 # xdg-open or a tool configured via .edmrc-file.
 # The script can also open a terminal at the selected path.
 #

@@ -67,16 +67,30 @@ You can customize `explore-with-dmenu.sh` by adding a file `.edmrc` to the direc
 `$HOME/.config`.
 `explore-with-dmenu.sh` sources this file at startup and interpretes its contents as bash.
 
-There are 4 variables that `explore-with-dmenu.sh` takes into account:
+There are 6 variables that `explore-with-dmenu.sh` takes into account:
 - `selected_path`
+- `history_file`
+- `max_history_entries`
 - `choices`
 - `open_command`
 - `open_terminal_command`
 
 ### `selected_path`
 `selected_path` represents the initial path `explore-with-dmenu.sh` is working on.
-This path will be prepended to all paths denoted in the `choices` array.
+This path will be prepended to all relative paths denoted in the `choices` array.
 `selected_path` defaults to `$HOME`.
+
+### `history_file`
+`history_file` defines the path to the history file that stores the last n selected entries
+from prior runs.
+`history_file` defaults to `"${HOME}/.config/.edm_history"`.
+
+### `max_history_entries`
+`max_history_entries` specifies the maximum number of entries that will be retained in the
+`history_file`.
+If the `history_file` contains `max_history_entries` entries, never entries will override
+older entries.
+`max_history_entries` defaults to 3.
 
 ### `choices`
 `choices` represents an array of initial items the user is represented by dmenu.
@@ -89,7 +103,8 @@ choices=(
     'path/to/some/often/used/folder'    # add subdolders of $selected_path like this
     'path/to/some/often/used/file.txt'  # add files in folders under $selected_path like this
     "$(ls "$selected_path")"            # output of `ls` on the $selected_path
-    )
+    "$(cat "$history_file")"            # recent entries from from prior runs
+)
 ```
 
 The first 3 denoted items, `'<open terminal here>'`, `'.'` and `'..'`, are special entries you may
@@ -101,18 +116,24 @@ or may not add to your initial list of choices:
 - `'..'` denotes the upper level directory. This makes, on selection, `explore-with-dmenu.sh`
   enter the parent directory.
 
-The 3 last entries in the array `choices` contain relative paths that will be prepended with the
-`selected_path`, i.e. `${selected_path}/path/to/some/often/used/folder` and
-`${selected_path}/path/to/some/often/used/file.txt` and all the immediate subdirectories and files
-of `selected_path`, which are computed using the command `ls`.
+The next 2 next entries in the array `choices` contain paths relative to the initial `selected_path`
+that, i.e. `${selected_path}/path/to/some/often/used/folder` and
+`${selected_path}/path/to/some/often/used/file.txt`
 
-If not specified otherwise, `choices` defaults to:
+The next entry `"$(ls "$selected_path")"` automatically creates entries for all the immediate
+subdirectories and files of `selected_path` by using the tool `ls`.
+
+The last entry `"$(cat "$history_file")"` automatically creates entries for recently selected
+entries.
+
+If not specified, `choices` defaults to:
 ```bash
 choices=(
     '<open terminal here>'
     '.'
     '..'
     "$(ls ${selected_path})"
+    "$(cat "$history_file")"
     )
 ```
 
@@ -151,7 +172,6 @@ https://tools.suckless.org/dmenu/scripts/
 
 
 ## TODO
-- make it work with absolute paths in the array `choices`
 - make it work with Web URLs in the array `choices`. At least, `xdg-open` can handle URLs
 - make the script take a custom rc-file as a command line option
 - print "usage" string, when `-h`, `--help` or wrong parameters are handed in

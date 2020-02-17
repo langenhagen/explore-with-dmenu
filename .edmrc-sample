@@ -1,15 +1,21 @@
 #!/bin/bash
 # rc file for explore-with-dmenu.sh
 #
-# This file is plain bash. It be sourced by explore-with-dmenu.sh after loading the defaults.
-# This makes it possible to overwrite some or all of settings
+# This file is plain bash. It is sourced by explore-with-dmenu.sh after it loaded the defaults.
+# This makes it possible to overwrite some or all of settings.
 #
-# There are 4 configurable variables that `explore-with-dmenu.sh` takes into account,
-# but changing only 2 of them, the array $choices and the string $open_terminal_command is
-# sufficient in most cases
+# There are 6 configurable variables that `explore-with-dmenu.sh` takes into account,
+# but changing only 2 of them, the array $choices and the string $open_terminal_command,
+# should be sufficient in most cases.
 
-# the initial path explore-with-dmenu.sh uses, if not specified, defaults to $HOME
+# the initial path explore-with-dmenu.sh uses; if not specified, defaults to $HOME
 selected_path="$HOME"
+
+# the path the selection history will be stored; defaults to ${HOME}/.config/.edm_history"
+history_file="${HOME}/.config/.edm_history"
+
+# the maximum number of recent entries that will be retained in the history file; defaults to 3
+max_history_entries=3
 
 # initial set of items shown at first
 choices=(
@@ -21,7 +27,8 @@ choices=(
     'my/music/library/'
     'my/music/library/my favorite song.mp3'
     "$(ls -t "$selected_path")"         # output of `ls -t` on the $selected_path
-    )
+    "$(cat "$history_file")"            # recent entries from prior runs
+)
 
 # if the array $choices is not specified, it defaults to:
 # choices=(
@@ -29,11 +36,12 @@ choices=(
 #     '.'
 #     '..'
 #     "$(ls "$selected_path")"
+#     "$(cat "$history_file")"
 #     )
 
 # the variable $open_command must store a command that will be executed with the chosen item is a
 # file or the string '.';
-# the command must handle can open files and folders and directory paths as arguments
+# the command must be able to open files and folders and handle directory paths as arguments
 open_command='xdg-open'
 
 # the variable $open_terminal_command must store a command that will be executed with the chosen

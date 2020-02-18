@@ -37,7 +37,7 @@ choices=(
 #     '..'
 #     "$(ls "$selected_path")"
 #     "$(cat "$history_file")"
-#     )
+# )
 
 # the variable $open_command must store a command that will be executed with the chosen item is a
 # file or the string '.';

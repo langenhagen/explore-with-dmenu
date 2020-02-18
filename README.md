@@ -1,8 +1,10 @@
 # explore-with-dmenu
-A handy and simple file explorer using `dmenu` (https://tools.suckless.org/dmenu) written in bash.
+A handy, simple but flexible file explorer using `dmenu` written in bash.
 
 Use the arrow-keys and type on the keyboard to find items and press `<Enter>` to navigate into
 folders or to open files with their default applications. Press `<ESC>` to exit at anytime.
+By default, `explore-with-dmenu` remembers your last selected entries and provides shortcuts to
+these.
 
 ![](res/screen-example.gif)
 
@@ -23,7 +25,7 @@ I recommend assigning a global keyboard shortcut (see below).
 
 
 ### Prerequisites & Dependencies
-You need to have the utility `dmenu` installed on your system.
+You need to have the utility `dmenu` (https://tools.suckless.org/dmenu) installed on your system.
 On `Ubuntu 18`, you can install it via:
 ```bash
 sudo apt install dmenu
@@ -35,7 +37,7 @@ brew install dmenu
 ```
 
 
-## Running
+## Usage
 Invoke the script to start dmenu:
 ```bash
 ./explore-with-dmenu.sh
@@ -43,7 +45,7 @@ Invoke the script to start dmenu:
 
 A `dmenu` window will be drawn depicting some initial items.
 You can use the arrow keys to navigate through the list of shown items.
-Typing on keyboard filters entries that do not contain the entered substring.
+Typing on the keyboard filters entries that do not contain the entered substring.
 Press `<Enter>` for a selection.
 If a folder has been selected, `explore-with-dmenu.sh` will open a new `dmenu` containing of the
 contents of the folder, including an option to open a terminal in that given directory, as well as
@@ -66,6 +68,8 @@ combination.
 You can customize `explore-with-dmenu.sh` by adding a file `.edmrc` to the directory
 `$HOME/.config`.
 `explore-with-dmenu.sh` sources this file at startup and interpretes its contents as bash.
+This way, logic that may set certain variables can be executed at the start of
+`explore-with-dmenu.sh`.
 
 There are 6 variables that `explore-with-dmenu.sh` takes into account:
 - `selected_path`
@@ -88,12 +92,12 @@ from prior runs.
 ### `max_history_entries`
 `max_history_entries` specifies the maximum number of entries that will be retained in the
 `history_file`.
-If the `history_file` contains `max_history_entries` entries, never entries will override
+If the `history_file` contains `max_history_entries` entries, newer entries will override
 older entries.
 `max_history_entries` defaults to 3.
 
 ### `choices`
-`choices` represents an array of initial items the user is represented by dmenu.
+`choices` represents a bash array of initial items the user is represented by dmenu.
 For instance:
 ```bash
 choices=(
@@ -120,11 +124,11 @@ The next 2 next entries in the array `choices` contain paths relative to the ini
 that, i.e. `${selected_path}/path/to/some/often/used/folder` and
 `${selected_path}/path/to/some/often/used/file.txt`
 
-The next entry `"$(ls "$selected_path")"` automatically creates entries for all the immediate
-subdirectories and files of `selected_path` by using the tool `ls`.
+The next entry `"$(ls "$selected_path")"` expands the output of `ls` and automatically creates
+entries for all the immediate subdirectories and files of `selected_path`.
 
-The last entry `"$(cat "$history_file")"` automatically creates entries for recently selected
-entries.
+The last entry `"$(cat "$history_file")"` adds the output of the history file and automatically
+creates entries for recently selected entries.
 
 If not specified, `choices` defaults to:
 ```bash
@@ -134,7 +138,7 @@ choices=(
     '..'
     "$(ls ${selected_path})"
     "$(cat "$history_file")"
-    )
+)
 ```
 
 ### `open_command`
@@ -152,7 +156,7 @@ needs.
 
 ## Contributing
 Work on your stuff locally, branch, commit and modify to your heart's content.
-If there is anything you can extend, fix or improve, please do so!
+If there is anything you can extend, fix or improve, please get in touch!
 Happy coding!
 
 

@@ -47,4 +47,4 @@ open_command='xdg-open'
 # the variable $open_terminal_command must store a command that will be executed with the chosen
 # item is the string '<open terminal here>';
 # the command must handle can open files and folders and directory paths as arguments
-open_terminal_command='konsole --workdir'
+open_terminal_command='gnome-terminal --working-directory'

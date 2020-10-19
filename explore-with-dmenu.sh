@@ -29,7 +29,7 @@ define_standard_settings() {
     fi
 }
 define_standard_settings
-source "${HOME}/.config/.edmrc" 2>/dev/null
+source "${XDG_CONFIG_HOME:-$HOME/.config}/.edmrc" 2>/dev/null
 
 write_selection_to_history_file() {
     sed -i "\:${selected_path}:d" "$history_file"
@@ -38,20 +38,24 @@ write_selection_to_history_file() {
 }
 
 while : ; do
-    dmenu_result="$(printf '%s\n' "${choices[@]}" | dmenu -i -p "$selected_path" -l 50)" || exit 1
-    if [ "$dmenu_result" = '<open terminal here>' ]; then
-        $open_terminal_command "$selected_path"
+    dmenu_result="$(printf '%s\n' "${choices[@]}" | dmenu -i -p "$selected_path" -l 50 $@)" || exit 1
+    if [ "$dmenu_result" == '<open terminal here>' ]; then
+        "$open_terminal_command" "$selected_path"
         write_selection_to_history_file
         exit 0
     fi
-
-    if [[ "$dmenu_result" == "/"* ]]; then
-        selected_path="${dmenu_result}"
+   
+    if [[ $dmenu_result == '/'* ]]; then
+        selected_path="$dmenu_result"
+    elif [[ $dmenu_result =~ ^(https?|ftps): ]]; then
+        "$open_command" "$dmenu_result"
+        write_selection_to_history_file
+        exit 0
     else
         selected_path="$(realpath "${selected_path}/${dmenu_result}")"
     fi
     if [ -f "$selected_path" ] || [ "$dmenu_result" = '.' ]; then
-        $open_command "$selected_path"
+        "$open_command" "$selected_path"
         write_selection_to_history_file
         exit 0
     elif [ -d "$selected_path" ]; then

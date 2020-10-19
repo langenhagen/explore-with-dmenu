@@ -11,7 +11,7 @@ these.
 The project is structured as follows:
 ```
 .
-├── .edmrc-sample               Example rc file.
+├── edmrc-sample                Example rc file.
 ├── explore-with-dmenu.sh       Main program.
 ├── LICENSE                     License definition.
 ├── README.md                   You are here now.
@@ -65,8 +65,8 @@ combination.
 
 
 ## Customizing
-You can customize `explore-with-dmenu.sh` by adding a file `.edmrc` to the directory
-`$HOME/.config`.
+You can customize `explore-with-dmenu.sh` by adding a file `edmrc` to the directory
+`$XDG_CONFIG_PATH/edm` or `$HOME/.config/edm`. You might have to create the directory.
 `explore-with-dmenu.sh` sources this file at startup and interpretes its contents as bash.
 This way, logic that may set certain variables can be executed at the start of
 `explore-with-dmenu.sh`.
@@ -87,7 +87,8 @@ This path will be prepended to all relative paths denoted in the `choices` array
 ### `history_file`
 `history_file` defines the path to the history file that stores the last n selected entries
 from prior runs.
-`history_file` defaults to `"${HOME}/.config/.edm_history"`.
+`history_file` defaults to `"$XDG_CONFIG_PATH/edm/history"` or, alternatively, to
+`$HOME/.config/edm/history`.
 
 ### `max_history_entries`
 `max_history_entries` specifies the maximum number of entries that will be retained in the
@@ -172,11 +173,10 @@ https://tools.suckless.org/dmenu/scripts/
 ## Known Issues
 - On `Linux`, the default programs `xdg-open` and `gnome-terminal` that come e.g. with
   `Ubuntu 18.04` are a default prerequisite. That may not work with some OSes out of the box, but
-  you can configure it via your `.edmrc`. No checks happen however.
+  you can configure it via your `edmrc`. No checks happen however.
 
 
 ## TODO
-- make it work with Web URLs in the array `choices`. At least, `xdg-open` can handle URLs
 - make the script take a custom rc-file as a command line option
 - print "usage" string, when `-h`, `--help` or wrong parameters are handed in
 - maybe rename `explore-with-dmenu.sh` to `suckless-explore.sh`

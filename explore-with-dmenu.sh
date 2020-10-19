@@ -7,9 +7,12 @@
 #
 # author: andreasl
 
+config_dir="${XDG_CONFIG_HOME:-$HOME/.config}/edm"
+mkdir -p "$config_dir"
+
 define_standard_settings() {
     selected_path="$HOME"
-    history_file="${HOME}/.config/.edm_history"
+    history_file="${config_dir}/history"
     max_history_entries=3
 
     choices=(
@@ -29,11 +32,11 @@ define_standard_settings() {
     fi
 }
 define_standard_settings
-source "${XDG_CONFIG_HOME:-$HOME/.config}/.edmrc" 2>/dev/null
+source "${config_dir}/edmrc" 2>/dev/null
 
 write_selection_to_history_file() {
-    sed -i "\:${selected_path}:d" "$history_file"
-    printf '%s\n' "$selected_path" >> "$history_file"
+    sed -i "\:${1}:d" "$history_file"
+    printf '%s\n' "$1" >> "$history_file"
     printf '%s\n' "$(tail -n "$max_history_entries" "$history_file")" > "$history_file"
 }
 
@@ -41,22 +44,21 @@ while : ; do
     dmenu_result="$(printf '%s\n' "${choices[@]}" | dmenu -i -p "$selected_path" -l 50 "$@")" || exit 1
     if [ "$dmenu_result" == '<open terminal here>' ]; then
         "$open_terminal_command" "$selected_path"
-        write_selection_to_history_file
+        write_selection_to_history_file "$selected_path"
         exit 0
-    fi
-
-    if [[ $dmenu_result == '/'* ]]; then
+    elif [[ $dmenu_result == '/'* ]]; then
         selected_path="$dmenu_result"
     elif [[ $dmenu_result =~ ^(https?|ftps): ]]; then
         "$open_command" "$dmenu_result"
-        write_selection_to_history_file
+        write_selection_to_history_file "$dmenu_result"
         exit 0
     else
         selected_path="$(realpath "${selected_path}/${dmenu_result}")"
     fi
+
     if [ -f "$selected_path" ] || [ "$dmenu_result" = '.' ]; then
         "$open_command" "$selected_path"
-        write_selection_to_history_file
+        write_selection_to_history_file "$selected_path"
         exit 0
     elif [ -d "$selected_path" ]; then
         choices=( '<open terminal here>' '.' '..' "$(ls "$selected_path")")

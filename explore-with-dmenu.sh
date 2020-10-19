@@ -38,13 +38,13 @@ write_selection_to_history_file() {
 }
 
 while : ; do
-    dmenu_result="$(printf '%s\n' "${choices[@]}" | dmenu -i -p "$selected_path" -l 50 $@)" || exit 1
+    dmenu_result="$(printf '%s\n' "${choices[@]}" | dmenu -i -p "$selected_path" -l 50 "$@")" || exit 1
     if [ "$dmenu_result" == '<open terminal here>' ]; then
         "$open_terminal_command" "$selected_path"
         write_selection_to_history_file
         exit 0
     fi
-   
+
     if [[ $dmenu_result == '/'* ]]; then
         selected_path="$dmenu_result"
     elif [[ $dmenu_result =~ ^(https?|ftps): ]]; then

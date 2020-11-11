@@ -58,7 +58,7 @@ Press `<ESC>` at anytime to exit.
 `explore-with-dmenu.sh` becomes handy when you assign it to a global keyboard shortcut
 that you can trigger from anywhere in your graphical user interface.
 
-On `Ubuntu 18.04`, you can go to:
+On `Ubuntu 18.04` and higher, you can go to:
 `Settings` > `Devices` > `Keyboard` > `Keyboard Shortcuts` > `+`.
 There you can set a command's name, the path to the `explore-with-dmenu.sh` executable and a key
 combination.

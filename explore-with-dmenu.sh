@@ -43,7 +43,7 @@ write_selection_to_history_file() {
 while : ; do
     dmenu_result="$(printf '%s\n' "${choices[@]}" | dmenu -i -p "$selected_path" -l 50 "$@")" || exit 1
     if [ "$dmenu_result" == '<open terminal here>' ]; then
-        "$open_terminal_command" "$selected_path"
+        $open_terminal_command "$selected_path"
         write_selection_to_history_file "$selected_path"
         exit 0
     elif [[ $dmenu_result == '/'* ]]; then
